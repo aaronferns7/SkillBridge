@@ -1,50 +1,19 @@
 package com.example.skillbridge.screens
-
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Hub
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.skillbridge.ui.theme.*
 import kotlinx.coroutines.delay
-
-@Composable
-fun SplashScreen(onTimeout: () -> Unit = {}) {
-
-    LaunchedEffect(Unit) {
-        delay(2000)
-        onTimeout()
-    }
-
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
-            Text(
-                text = "SkillBridge",
-                fontSize = 34.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Text(
-                text = "Bridge Skills to Opportunities",
-                fontSize = 16.sp
-            )
-
-        }
-
-    }
-
-}
+@Composable fun SplashScreen(onTimeout:()->Unit){ var show by remember{mutableStateOf(false)}; LaunchedEffect(Unit){show=true;delay(2000);onTimeout()}; Box(Modifier.fillMaxSize().background(Brush.linearGradient(listOf(GradientStart,GradientEnd))),contentAlignment=Alignment.Center){Column(horizontalAlignment=Alignment.CenterHorizontally){AnimatedVisibility(show,enter=fadeIn(tween(650))+scaleIn(tween(650))){Column(horizontalAlignment=Alignment.CenterHorizontally){Surface(shape=CircleShape,color=Color.White.copy(.18f),modifier=Modifier.size(88.dp)){Icon(Icons.Default.Hub,null,Modifier.padding(22.dp),Color.White)};Spacer(Modifier.height(16.dp));Text("SkillBridge",fontWeight=FontWeight.ExtraBold,fontSize=38.sp,color=Color.White)}}; AnimatedVisibility(show,enter=fadeIn(tween(700,650))){Text("Bridge Skills to Opportunities",color=Color.White.copy(.9f),modifier=Modifier.padding(top=12.dp))}}}}
